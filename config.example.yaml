@@ -1,0 +1,105 @@
+# ChemAgent Configuration Example
+# Copy this file to config.yaml and customize for your needs
+
+# Model Configuration
+model:
+  provider: anthropic  # Options: anthropic, openai, gemini
+  model_name: claude-3.5-sonnet  # Model identifier
+  temperature: 0.7  # Generation temperature (0-1)
+  max_tokens: 4096  # Maximum tokens per response
+  timeout: 60  # Request timeout in seconds
+
+# Tool Configurations
+tools:
+  - name: rdkit_tool
+    enabled: true
+    config:
+      compute_3d: true
+      optimize_geometry: true
+      
+  - name: pubchem
+    enabled: true
+    config:
+      cache_results: true
+      max_results: 10
+      
+  - name: molecule_visualizer
+    enabled: true
+    config:
+      default_format: png
+      default_size: [400, 400]
+      
+  - name: reaction_predictor
+    enabled: true
+    config:
+      use_templates: true
+      confidence_threshold: 0.7
+
+# MCP Server Configuration
+mcp:
+  enabled: true
+  default_timeout: 30
+  servers:
+    - name: local_tools
+      uri: ws://localhost:8765
+      description: Local chemistry tools server
+      auto_connect: true
+      retry_interval: 5
+      max_retries: 3
+      
+    - name: remote_compute
+      uri: ws://compute.example.com:8766
+      description: Remote computational chemistry server
+      auto_connect: false
+      metadata:
+        requires_auth: true
+
+# Role Configurations
+roles:
+  - name: organic_chemist
+    description: Expert in organic synthesis and mechanisms
+    system_prompt: |
+      You are an expert organic chemist with deep knowledge of synthesis,
+      reaction mechanisms, and structure-activity relationships.
+    tools:
+      - rdkit_tool
+      - reaction_predictor
+      - molecule_visualizer
+      - pubchem
+    capabilities:
+      - synthesis_planning
+      - mechanism_explanation
+      - retrosynthetic_analysis
+      
+  - name: drug_designer
+    description: Specialist in medicinal chemistry and drug design
+    system_prompt: |
+      You are a drug design expert focused on lead optimization,
+      ADMET properties, and structure-based drug design.
+    tools:
+      - rdkit_tool
+      - pubchem
+      - molecule_visualizer
+    capabilities:
+      - lead_optimization
+      - admet_prediction
+      - pharmacophore_modeling
+
+# General Settings
+workspace_dir: ~/.chemagent  # Workspace directory for files and cache
+cache_dir: ~/.chemagent/cache  # Cache directory for results
+log_level: INFO  # Logging level: DEBUG, INFO, WARNING, ERROR
+enable_telemetry: false  # Enable anonymous usage statistics
+
+# Advanced Settings
+advanced:
+  parallel_tool_execution: true  # Execute tools in parallel when possible
+  max_concurrent_tools: 5  # Maximum concurrent tool executions
+  cache_ttl: 3600  # Cache time-to-live in seconds
+  history_limit: 100  # Maximum conversation history messages
+  auto_save_sessions: true  # Automatically save conversation sessions
+  
+# API Keys (set via environment variables for security)
+# ANTHROPIC_API_KEY=your_key_here
+# OPENAI_API_KEY=your_key_here
+# GEMINI_API_KEY=your_key_here

@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-openbabel"
+version = "0.1.0"
+description = "OpenBabel MCP Server - Model Context Protocol for molecular format conversion"
+authors = [
+    {name = "ChemAgent Team", email = "contact@chemagent.org"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+keywords = ["mcp", "openbabel", "chemistry", "molecular-conversion", "model-context-protocol"]
+dependencies = []
+
+[project.optional-dependencies]
+full = ["openbabel-wheel>=3.1.0"]
+
+[project.urls]
+Homepage = "https://github.com/dazhaolang/ai-chemkit"
+Documentation = "https://github.com/dazhaolang/ai-chemkit/tree/main/mcp_servers/mcp_openbabel"
+Repository = "https://github.com/dazhaolang/ai-chemkit"
+Issues = "https://github.com/dazhaolang/ai-chemkit/issues"
+
+[project.scripts]
+mcp-openbabel = "mcp_openbabel_server:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mcp_openbabel*"]

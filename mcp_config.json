@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "chemagent": {
+      "command": "python",
+      "args": ["-m", "chemagent.mcp_server"],
+      "description": "ChemAgent MCP Server - Chemistry tools orchestrator",
+      "alwaysOn": false
+    }
+  },
+  "globalShortcuts": {
+    "cc-analyze": "Run molecular analysis",
+    "cc-synthesize": "Design synthesis routes",
+    "cc-check": "Check safety and patents",
+    "cc-search": "Search databases and literature"
+  }
+}
