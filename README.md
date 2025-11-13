@@ -2,12 +2,12 @@
 
 A collaborative framework for building chemistry & materials agents with general agent framework, like Gemini CLI, Claude code, or Codex, +**MCP**.
 
-**CoChem Agents:** an open framework for chemistry & materials AI. Use Gemini CLI as the general agent shell and add capabilities via the Model Context Protocol (MCP). Skip one-off agents—publish MCP servers (RDKit, Materials Project, sims, lab APIs) and compose them. Integrate once, reuse everywhere.
+**CoChem Agents:** an open framework for chemistry & materials AI. Use CodeX as the general agent shell and add capabilities via the Model Context Protocol (MCP). Skip one-off agents—publish MCP servers (RDKit, Materials Project, sims, lab APIs) and compose them. Integrate once, reuse everywhere.
 
-**CoChem Agents** turns the “one-agent-per-domain” pattern on its head. Instead of crafting bespoke chemistry or materials agents, we use **general agent framework, like Gemini CLI, Claude code, or Codex** as the general-purpose agent shell and plug in domain tools via the **Model Context Protocol (MCP)**. Anyone can contribute an MCP server—RDKit, Materials Project, your internal pipeline—and it becomes instantly usable by the same agent. This creates an open, extensible ecosystem rather than a zoo of siloed agents. 
+**CoChem Agents** turns the “one-agent-per-domain” pattern on its head. Instead of crafting bespoke chemistry or materials agents, we use **general agent framework, like Codex** as the general-purpose agent shell and plug in domain tools via the **Model Context Protocol (MCP)**. Anyone can contribute an MCP server—RDKit, Materials Project, your internal pipeline—and it becomes instantly usable by the same agent. This creates an open, extensible ecosystem rather than a zoo of siloed agents. 
 
 
-## Why chemistry & materials agents matter (now)
+## Why chemistry & materials agents matter
 
 AI is rapidly accelerating discovery across chemistry and materials—from structure/property prediction to polymer and crystal modeling—pushing research beyond static prediction toward **agentic** workflows that plan, act, and iterate. Surveys and community reports document both the momentum and the need for robust tooling to make these systems practical in the lab and in silico. 
 
@@ -29,10 +29,10 @@ Most prior efforts ship a **standalone agent per subfield** (drug design, cataly
 ## Our approach (what’s different)
 
 **1.One agent framework to rule them all**
-Use Gemini CLI as the generic agent runtime (chat + tools + prompts). No more domain-specific shells. 
+Use Codex as the generic agent runtime (chat + tools + prompts). No more domain-specific shells. 
 
 **2.Tools as MCP servers**
-Expose chemistry/materials capabilities as MCP tools (standardized names, schemas, metadata). Any MCP-compatible client (like Gemini CLI) can discover and call them—zero bespoke glue in the agent. 
+Expose chemistry/materials capabilities as MCP tools (standardized names, schemas, metadata). Any MCP-compatible client (like Codex) can discover and call them—zero bespoke glue in the agent. 
 
 
 **3.Open ecosystem, not one-off agents**
@@ -50,7 +50,7 @@ Expose chemistry/materials capabilities as MCP tools (standardized names, schema
 
 ## TL;DR (project intent)
 
- - **Mission:** build an open, multi-tool ecosystem for chemistry & materials agents by unifying on Gemini CLI + MCP.
+ - **Mission:** build an open, multi-tool ecosystem for chemistry & materials agents by unifying on Codex + MCP.
 
  - **Why it matters:** agentic science needs interoperable tools, not more siloed agents. 
 
@@ -179,7 +179,7 @@ cc-synthesize "CC(=O)OC1=CC=CC=C1C(=O)O"
 cc-workflow drug-discovery target.pdb
 ```
 
-### Gemini CLI 中使用
+### Codex 中使用
 ```bash
 # 分析分子
 gemini chem:analyze "CC(=O)OC1=CC=CC=C1C(=O)O" --properties
