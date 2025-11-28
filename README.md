@@ -1,5 +1,9 @@
 # CoChem Agents
 
+
+![Uploading Gemini_Generated_Image_9vntz29vntz29vnt.png…]()
+
+
 A collaborative framework for building chemistry & materials agents with general agent framework, like Gemini CLI, Claude code, or Codex, +**MCP**.
 
 **CoChem Agents:** an open framework for chemistry & materials AI. Use CodeX as the general agent shell and add capabilities via the Model Context Protocol (MCP). Skip one-off agents—publish MCP servers (RDKit, Materials Project, sims, lab APIs) and compose them. Integrate once, reuse everywhere.
