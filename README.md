@@ -1,7 +1,8 @@
 # CoChem Agents
 
 
-![Uploading Gemini_Generated_Image_9vntz29vntz29vnt.png…]()
+
+<img width="2816" height="1536" alt="Gemini_Generated_Image_9vntz29vntz29vnt" src="https://github.com/user-attachments/assets/b20a37a8-f1a6-43b2-a34f-db14cf4b87e0" />
 
 
 A collaborative framework for building chemistry & materials agents with general agent framework, like Gemini CLI, Claude code, or Codex, +**MCP**.
