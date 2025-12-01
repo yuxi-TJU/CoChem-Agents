@@ -169,7 +169,7 @@ EOF
 ### Codex 中使用
 ```bash
 # 分析分子
-analyze "CC(=O)OC1=CC=CC=C1C(=O)O" --properties
+codex exec --skip-git-repo-check -- "请调用 chemagent_admet_predict 工具, 使用 SMILES CC(=O)OC1=CC=CC=C1C(=O)O, includeRiskDetails true"
 
 # 批处理
 batch molecules.csv --operation analyze
@@ -207,71 +207,6 @@ Ran chemagent_admet_predict for `CC(=O)OC1=CC=CC=C1C(=O)O`. Key outputs:
 - Scores: druglikeness −0.478 (moderate), drugScore 0.143.
 - Toxicity: high-risk flags for mutagenicity, tumorigenicity, reproductive effects (all cite known issue `dklB@@QmR[fUxUZBBF@@`); no irritation risk noted.
 - Warning: overall high-risk toxicity signals present; manual review recommended.
-```
-### Case2
-```bash
-# 使用别名
-/sc:chem-analyze aspirin --source name --focus drug
-```
-```bash
-Aspirin (acetylsalicylic acid, PubChem CID 2244) standardizes to SMILES CC(=O)OC1=CC=CC=C1C(=O)O and InChIKey
-  BSYNRYMUTXBXSQ-UHFFFAOYSA-N. Canonical properties pulled from PubChem/PUG:
-
-  - Formula C9H8O4, MW 180.16 g/mol.
-  - TPSA 63.6 Å²; LogP (XLogP3-AA) 1.2.
-  - H-bond donors 1, acceptors 4; rotatable bonds 3.
-
-  Lipinski screen is fully satisfied (MW<500, HBD≤5, HBA≤10, LogP<5, TPSA<140, <10 rotatable bonds), aligning with
-  aspirin’s established oral bioavailability. Chemically the molecule combines a salicylate core with an acetyl ester;
-  hydrolysis (esterases or alkaline media) releases salicylic acid, the primary COX inhibitor. The aromatic/acetyl motif
-  yields modest lipophilicity while the carboxylate gives aqueous solubility when ionized (pKa ≈ 3.5).
-
-  Safety considerations are dominated by systemic COX-1 inhibition (GI irritation/bleeding), salicylate toxicity at
-  high dose (tinnitus, metabolic acidosis), Reye’s syndrome in children with viral illness, and bronchospasm in aspirin-
-  exacerbated respiratory disease; platelet inhibition prolongs bleeding. Storage needs to minimize hydrolysis (dry,
-  cool, pH-neutral conditions).
-
-  Suggested follow-ups if you need more depth:
-
-  1. Run chemagent-admet MCP on the SMILES for fresh descriptor/tox panels tailored to your models.
-  2. Use /sc:chem-intel "aspirin" --scope safety if you want summarized regulatory/adverse-event notes tied to the
-     latest labels.
-```
-### Case3
-```bash
-# 合成规划
-/sc:chem-intel "Ibuprofen synthesis" --scope synthesis
-```
-```bash
-Route Overview
-
-  - Standard Boots/Hoechst process begins from isobutylbenzene: para-selective Friedel–Crafts acylation with acetyl
-    chloride/AlCl₃ furnishes 4-isobutylacetophenone in ~90 % p-selectivity after distillation.
-  - Darzens-like α-halogenation (Br₂/HBr) of the acetyl side chain followed by base-induced hydrolysis rearranges the α-
-    bromo ketone to the corresponding α-hydroxy acid; dehydration yields 4-isobutyl-α-methylstyrene oxide intermediates.
-  - Carbonylation (HF/BF₃ or HCN/H₂SO₄ route) inserts the extra carbon: formation of the nitrile (via HCN addition) and
-    subsequent hydrolysis under acidic or basic conditions leads to ibuprofen’s propionic acid motif.
-  - Final steps: Racemate resolution optional (common product is racemic); neutralize/isolate as the free acid, then
-    crystallize to pharmacopeial spec (drying ≤1 % moisture).
-
-  Practical Notes
-
-  - Maintain strict temperature control during Friedel–Crafts (≤10 °C charge, raise to 40 °C) to minimize ortho-isomer
-    formation.
-  - Handle HF/BF₃ or HCN sequences with full alkylation-level PPE and scrubbers; consider the “green” BHC catalytic
-    carbonylation (Pd-catalyzed carbonylation of 4-isobutylstyrene with CO and HCl) if hazardous reagents are
-    problematic.
-  - Typical yields over the 3-step Boots sequence are 60–65 %; BHC process improves overall yield to >75 % and reduces
-    waste.
-
-  Next Steps
-
-  1. Confirm available feedstocks (isobutylbenzene, acetyl chloride, HF/BF₃ or Pd/CO setup) and decide whether to run
-     Boots or BHC variant.
-  2. Draft detailed batch instructions (stoichiometry, solvent charge, quench) for each step and run a 100 g pilot to
-     lock selectivity and impurity profile.
-  3. Plan workup/purification (crystallization from heptane or IPA/water) and analytical release (HPLC assay, chiral
-     excess if needed).
 ```
 
 ```
