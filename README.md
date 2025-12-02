@@ -62,19 +62,34 @@ Expose chemistry/materials capabilities as MCP tools (standardized names, schema
 
 ## 快速开始
 ### 安装
-### 🚀 快速安装（推荐）
-#### 一键安装（最简单）
-```bash
-curl -fsSL https://raw.githubusercontent.com/yuxi-TJU/CoChem-Agents/main/install.sh | bash
-```
-#### 或者手动安装
-# 克隆仓库
+#### 克隆仓库
 ```bash
 git clone https://github.com/yuxi-TJU/CoChem-Agents.git
 cd ai-chemkit
+```
 
-# 运行交互式安装器
-python chemagent_install.py
+#### 安装依赖
+```bash
+npm install
+npm run build #生成 dist/.
+```
+#### 配置各 API 密钥
+CHEMSPIDER_API_KEY、MATERIALS_PROJECT_API_KEY 等，通过环境变量或 .env.
+
+#### CLI 安装到 Codex
+##### 自动安装（推荐）
+```bash
+npx chemagent
+```
+##### 手动安装
+```bash
+npx chemagent-cli install --platform codex --home <路径> --configure-mcp
+```
+
+#### 配置 & 注册 MCP 服务
+~/.chemagent/mcp_config.json，里面列着所有内置和社区 MCP
+```bash
+npx chemagent-<name> #注册你需要的服务器
 ```
 
 #### 安装RDKit MCP服务器（官方支持）
@@ -86,58 +101,6 @@ python chemagent_install.py mcp
 ./install_rdkit_mcp.sh
 ```
 
-### 📦 安装模式
-ChemAgent 提供多种安装模式，满足不同需求：
-
-#### 1. **快速安装** - 自动检测并安装所有功能
-```bash
-python chemagent_install.py
-# 或安装后使用: chemagent install
-```
-
-#### 2. **交互式安装** - 选择要安装的组件
-```bash
-python chemagent_install.py --interactive
-# 选择平台、功能、工具等
-```
-
-#### 3. **最小安装** - 仅安装核心功能
-```bash
-python chemagent_install.py --minimal
-# 轻量级安装，适合资源受限环境
-```
-
-#### 4. **开发者模式** - 包含开发工具
-```bash
-python chemagent_install.py --profile developer
-# 包含测试、代码格式化、类型检查等工具
-```
-
-### 🎯 其他选项
-```bash
-# 查看安装状态
-python chemagent_install.py status
-
-# 安装示例文件
-python chemagent_install.py examples
-
-# 更新到最新版本
-python chemagent_install.py update
-
-# 静默安装（自动化）
-python chemagent_install.py --yes --quiet
-
-# 仅安装特定平台
-python chemagent_install.py --platform claude-code
-python chemagent_install.py --platform gemini-cli
-
-# Gemini CLI 专用安装（基于提示词）
-chmod +x install_gemini_simple.sh
-./install_gemini_simple.sh
-
-# 查看所有选项
-python chemagent_install.py --help
-```
 
 ## 命令系统
 
