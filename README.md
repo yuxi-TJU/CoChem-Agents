@@ -65,12 +65,12 @@ Expose chemistry/materials capabilities as MCP tools (standardized names, schema
 ### 🚀 快速安装（推荐）
 #### 一键安装（最简单）
 ```bash
-curl -fsSL https://raw.githubusercontent.com/dazhaolang/ai-chemkit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/yuxi-TJU/CoChem-Agents/main/install.sh | bash
 ```
 #### 或者手动安装
 # 克隆仓库
 ```bash
-git clone https://github.com/dazhaolang/ai-chemkit.git
+git clone https://github.com/yuxi-TJU/CoChem-Agents.git
 cd ai-chemkit
 
 # 运行交互式安装器
