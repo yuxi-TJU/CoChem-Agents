@@ -92,15 +92,6 @@ npx chemagent-cli install --platform codex --home <路径> --configure-mcp
 npx chemagent-<name> #注册你需要的服务器
 ```
 
-#### 安装RDKit MCP服务器（官方支持）
-```bash
-# 安装官方的mcp-rdkit包
-python chemagent_install.py mcp
-
-# 或单独安装
-./install_rdkit_mcp.sh
-```
-
 
 ## 命令系统
 
@@ -129,25 +120,9 @@ tools: [read_file, web_search]
 EOF
 ```
 
-### Codex 中使用
-```bash
-# 分析分子
-codex exec --skip-git-repo-check -- "请调用 chemagent_admet_predict 工具, 使用 SMILES CC(=O)OC1=CC=CC=C1C(=O)O, includeRiskDetails true"
-
-# 批处理
-batch molecules.csv --operation analyze
-
-# 图像识别
-analyze molecule.png --image-to-structure
-
-# 使用别名
-analyze aspirin  # 快速分析
-synthesize ibuprofen  # 合成规划
-```
-
 ## Case Study
 ### Case1
-```bash
+```codex
 # 分析分子
 codex exec --skip-git-repo-check -- "请调用 chemagent_admet_predict 工具, 使用 SMILES CC(=O)OC1=CC=CC=C1C(=O)O, includeRiskDetails true"
 ```
