@@ -123,29 +123,67 @@ EOF
 ## Case Study
 ### Case1
 ```codex
-# 分析分子
-codex exec --skip-git-repo-check -- "请调用 chemagent_admet_predict 工具, 使用 SMILES CC(=O)OC1=CC=CC=C1C(=O)O, includeRiskDetails true"
+请帮我设计一个环保的阿司匹林合成路线（请调用mcp工具并告诉我你调用了哪些mcp工具）
 ```
-```bash
-tool chemagent-admet.chemagent_admet_predict({"smiles":"CC(=O)OC1=CC=CC=C1C(=O)O","includeRiskDetails":true})
-codex
-Ran chemagent_admet_predict for `CC(=O)OC1=CC=CC=C1C(=O)O`. Key outputs:
+```codex
+• Green Aspirin Route
 
-- Basic props: formula `C9H8O4`, MW 180.04, logP 1.13, logS −1.93, TPSA 63.6 Å², 3 rotatable bonds, 1 HBD/4 HBA.
-- Lipinski: no violations; passes.
-- Scores: druglikeness −0.478 (moderate), drugScore 0.143.
-- Toxicity: high-risk flags for mutagenicity, tumorigenicity, reproductive effects (all cite known issue `dklB@@QmR[fUxUZBBF@@`); no irritation risk noted.
-- Warning: overall high-risk toxicity signals present; manual review recommended.
-tokens used
-1,360
-Ran chemagent_admet_predict for `CC(=O)OC1=CC=CC=C1C(=O)O`. Key outputs:
+  - Used MCP tool chemagent-extras: chem_synthesize to frame the eco-design constraints and ensure route planning stayed
+    aligned with renewable feedstocks/recyclable catalysts.
+  - Start from bio-derived phenol converted to sodium phenolate; perform a Kolbe–Schmitt fixation with recycled/biogenic
+    CO₂ at 130 °C and 8–10 bar in water or glycerol/water to give sodium salicylate, then mildly acidify with recyclable
+    dilute acetic acid to obtain salicylic acid.
+  - Dry salicylic acid and acetylate with bio-ethanol–derived acetic anhydride (0.95–1.0 equiv) in a recyclable solvent
+    such as 2-MeTHF or EtOAc at 70–80 °C, using a reusable solid acid catalyst (Amberlyst-15 or supported succinic acid/
+    Fe³⁺); catalyst is filtered, washed, and reused.
+  - Quench with a small amount of reclaimed water to hydrolyze excess anhydride; phase-separate, recover acetic acid for
+    reconversion to acetic anhydride, and recycle organic solvent by distillation.
+  - Crude aspirin is recrystallized from ethanol/water (both bio-sourced) with mother liquors redistilled; solid is
+    dried under reduced pressure powered by low-carbon electricity.
+  - Waste minimization: no mineral acids beyond trace acetic acid, closed-loop solvents, solid acid catalyst
+    regeneration, and CO₂ capture integration keep the E-factor low and the process compliant with green-chemistry
+    principles.
 
-- Basic props: formula `C9H8O4`, MW 180.04, logP 1.13, logS −1.93, TPSA 63.6 Å², 3 rotatable bonds, 1 HBD/4 HBA.
-- Lipinski: no violations; passes.
-- Scores: druglikeness −0.478 (moderate), drugScore 0.143.
-- Toxicity: high-risk flags for mutagenicity, tumorigenicity, reproductive effects (all cite known issue `dklB@@QmR[fUxUZBBF@@`); no irritation risk noted.
-- Warning: overall high-risk toxicity signals present; manual review recommended.
+  Next steps: 1) quantify mass balance/E-factor for target scale; 2) run small Kolbe–Schmitt trials to confirm CO₂
+  recycle efficiency.
 ```
 
+### Case2
+```codex
+请帮我分析作为有机中间合成体，邻苯二甲酸单乙酸酯可以制备什么材料，并给出制备方法（请调用mcp工具并告诉我你调用了哪些mcp工具）
 ```
+```codex
+• Downstream Materials
+
+  - chemagent-extras: chem_synthesize (targets: cellulose acetate phthalate; DEHP plasticizer) flagged phthalic
+    monoacetate as a versatile half-ester that can be driven either toward anhydrides for acylation chemistry or toward
+    fully esterified products with long-chain alcohols. Building on those prompts, here are practical materials you
+    can access:
+  - Cellulose acetate phthalate (enteric coating polymer) — Convert phthalic monoacetate to the mixed anhydride by
+    treating with acetic anhydride (1.2 eq) and catalytic pyridine at 80 °C; strip excess anhydride to get a reactive
+    acylation mixture still containing the monoacetate. Add pre-activated cellulose acetate (DS≈1.7) in acetone and
+    raise to 50 °C while adding triethylamine as HCl scavenger; the phthalyl group installs at remaining hydroxyls,
+    giving cellulose acetate phthalate after neutralization and precipitation into water. Wash, dry, then mill for
+    tablet coating use.
+  - Di-2-ethylhexyl phthalate (DEHP) or other PVC plasticizer-grade diesters — Hydrolyze the monoacetate (50 % aq. NaOH,
+    80 °C) to revert the free phthalic acid half, re-esterify via acid chloride formation (SOCl₂, catalytic DMF, 70 °C)
+    to produce phthalyl chloride; react with 2-ethylhexanol (2.2 eq) and pyridine at 0–25 °C, then heat to 100 °C for
+    completion. Alternatively, run a direct Fischer esterification on the monoacetate with excess 2-ethylhexanol under
+    Dean–Stark to displace the terminal acetate and generate the diester; vacuum-strip and polish through a neutral
+    alumina bed to reach plasticizer purity.
+  - Alkyd/unsaturated polyester resins (coil coatings, wire enamels) — Use the monoacetate as a “half-ester” feed in an
+    alkyd cook: charge it with glycerol (or pentaerythritol) and fatty-acid-modified monoglycerides at 220 °C under N₂.
+    The monoacetate first cleaves to phthalic acid in situ, then esterifies to form the phthalate-rich segments that
+    lend hardness and gloss. Apply vacuum toward the end to pull off acetic acid and drive polycondensation to acid
+    value <15 mg KOH/g; the resulting resin dissolves in high-boiling esters for coating formulations.
+  - Specialty imide monomers (e.g., phthalic-imide curing agents) — Convert monoacetate to phthalic anhydride via
+    vacuum pyrolysis (180 °C, 20 mmHg) or acetic anhydride reflux with catalytic ZnCl₂; react with ammonia or amines
+    (e.g., 4,4′-diaminodiphenyl ether) in glacial acetic acid at 120 °C to form amic acids, then dehydrate with acetic
+    anhydride to imide monomers used in high-Tg polyimides.
+
+  Each route leverages the monoacetate either as a latent anhydride (for polymer acylations) or as a controllable half-
+  ester that can be selectively converted to acid chlorides/diesters, aligning with the MCP guidance on using it as a
+  modular intermediate.
+```
+
 “Integrate once, compose everywhere.”
