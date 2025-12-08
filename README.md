@@ -185,5 +185,3 @@ EOF
   ester that can be selectively converted to acid chlorides/diesters, aligning with the MCP guidance on using it as a
   modular intermediate.
 ```
-
-“Integrate once, compose everywhere.”
