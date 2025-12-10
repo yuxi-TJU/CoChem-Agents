@@ -218,3 +218,61 @@ EOF
   1. Use a solid-state method (DFT, GULP with Buckingham potentials, etc.) to relax both lattice vectors and positions starting from output/rutile_tio2_uff_opt.xyz.
   2. Validate against experimental observables (lattice constants, Raman modes) to ensure the structure remains faithful once higher-level optimization is complete.
 ```
+
+### Case5
+```codex
+请对目标分子布洛芬（Ibuprofen）执行逆合成分析，给出建议的合成前体和切断位点。
+```
+```codex
+• Ibuprofen Retrosynthesis
+
+  - Breakpoint 1 (carboxylate install): Disconnect the propionic acid side chain from the aromatic ring to give 4-isobutylacetophenone (isobutylbenzene with para-
+    acylation). This ketone is the key intermediate for the classic Boots/Hoechst process; oxidative or hydrocyanation routes can extend the side chain and set the α-
+    methyl center before final hydrolysis.
+  - Breakpoint 2 (aromatic core): Further disconnect 4-isobutylacetophenone into isobutylbenzene and acetyl chloride (or equivalent acylating agent). Fragmentation via
+    Friedel–Crafts acylation introduces the acetyl group para to the isobutyl substituent.
+  - Alternative modern route (BHC process): Use isobutylbenzene → para-acylation to 4-isobutylacetophenone → catalytic hydrogenation to the corresponding
+    α-(isobutyl)ethylbenzene → carbonylation/hydroformylation to the propionic acid motif. This avoids stoichiometric cyanide and simplifies cleanup.
+
+  Suggested Precursors
+
+  1. Isobutylbenzene: accessible from isobutyl chloride + benzene via Friedel–Crafts alkylation or from isobutylbenzene commercial supply. Provides the aromatic
+     scaffold.
+  2. Acetyl chloride (or acetic anhydride): installs the acetyl unit para to the isobutyl group under Friedel–Crafts conditions, furnishing 4-isobutylacetophenone.
+  3. Oxidizing/chain-extension agent: either (a) hydrogen cyanide plus acid hydrolysis for the classic Ritter-type homologation, or (b) carbon monoxide/hydrogen
+     (hydroformylation) followed by oxidation in the BHC route.
+
+  These disconnections highlight the two strategic bond formations: (1) acylation to append the acetyl group on the aromatic ring, and (2) homologation/oxidation of
+  the acetyl group to the α-methyl carboxylic acid side chain to yield ibuprofen.
+```
+
+### Case6
+```codex
+将分子 Aspirin 对接到靶点蛋白 4COX，并给出结合亲和力评分。
+```
+```codex
+• Docking Result
+
+  - AutoDock Vina 1.2.7 docking (script output/docking/aspirin_4cox/run_vina.py:1) used chain A of 4COX (heme removed to allow rigid PDBQT generation) and a RDKit-
+    generated aspirin conformer; grid center was the crystallographic indomethacin centroid at 24.849, 22.295, 15.126 Å with a 18.4 × 16.7 × 20.5 Å box (output/
+    docking/aspirin_4cox/aspirin_docking_summary.txt:1).
+  - Best pose affinity: -6.819 kcal/mol, with the top cluster ranging from −6.8 to −6.3 kcal/mol (output/docking/aspirin_4cox/aspirin_docking_summary.txt:3, output/
+    docking/aspirin_4cox/aspirin_vina_energies.txt:2-9). All poses and detailed energy components are in output/docking/aspirin_4cox/aspirin_docked_poses.pdbqt
+    and .../aspirin_vina_energies.txt.
+  - Vina log (stdout from python3 output/docking/aspirin_4cox/run_vina.py) shows consistent RMSDs (~1.5–2.5 Å) indicating a stable binding mode in the COX active
+    channel.
+
+  Context & Caveats
+
+  - Receptor preparation kept only chain A and removed the heme cofactor to satisfy Open Babel’s rigid PDBQT writer; thus metalloprotein electrostatics are absent and
+    reported affinities likely underestimate true binding strength.
+  - Glycans and crystallographic waters were also removed; if these contacts are important, consider reintroducing key residues and converting with AutoDockTools/Meeko
+    for higher fidelity.
+
+  Next Steps
+
+  1. If you need heme present, rebuild the receptor with MGLTools/Meeko (supports cofactors) before rerunning run_vina.py.
+  2. Inspect aspirin_docked_poses.pdbqt in PyMOL/ChimeraX to verify hydrogen-bonding vs. the native indomethacin pose; adjust the grid or exhaustiveness if a different
+     pocket should be sampled.
+  3. For comparative scoring, repeat the workflow with known COX inhibitors to benchmark the −6.8 kcal/mol affinity estimate.
+```
