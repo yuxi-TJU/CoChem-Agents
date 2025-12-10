@@ -185,3 +185,36 @@ EOF
   ester that can be selectively converted to acid chlorides/diesters, aligning with the MCP guidance on using it as a
   modular intermediate.
 ```
+
+### Case3
+```codex
+我有一个包含多个 SMILES 的列表：['CC(=O)Oc1ccccc1C(=O)O', 'CN1C=NC2=C1C(=O)N(C(=O)N2C)C']。请帮我计算这些分子的 LogP 和分子量，并筛选出符合里宾斯基五规则（Lipinski's Rule of 5）的分子，最后输出符合条件的分子列表。
+```
+```codex
+• Results
+
+  - CC(=O)Oc1ccccc1C(=O)O: MW 180.16, LogP 1.31, HBD 1, HBA 3 → Lipinski-compliant
+  - CN1C=NC2=C1C(=O)N(C(=O)N2C)C: MW 194.19, LogP −1.03, HBD 0, HBA 6 → Lipinski-compliant
+
+  Lipinski-passing SMILES list: ['CC(=O)Oc1ccccc1C(=O)O', 'CN1C=NC2=C1C(=O)N(C(=O)N2C)C']. Let me know if you have more molecules to screen or need a tabular export.
+```
+
+### Case4
+```codex
+请在数据库中检索二氧化钛（TiO2）的晶体结构信息，提取最稳定的构型，并使用通用力场对其几何结构进行初步优化。
+```
+```codex
+• - Pulled TiO₂ rutile (P42/mnm) from the Crystallography Open Database (COD 9004141) because it is the thermodynamic ground-state polymorph at ambient conditions; the
+    CIF lists a = b = 4.593 Å, c = 2.959 Å, Z = 2, matching the Meagher & Lager 1979 refinement (data/tiO2_rutile_cod9004141.cif:32-44).
+  - Converted the COD entry to an explicit 6-atom conventional cell and saved both output/rutile_tio2_initial_ase.cif and output/rutile_tio2_initial_ase.xyz for reuse
+    downstream.
+  - Performed a Universal Force Field relaxation via Open Babel’s OBForceField (500 CG steps, 1e‑6 tolerance). The optimized coordinates are in output/
+    rutile_tio2_uff_opt.xyz (output/rutile_tio2_uff_opt.xyz:2-8), and the UFF energy / force diagnostics are captured in output/rutile_tio2_uff_summary.json (energy
+    −0.217 kcal mol⁻¹, max residual force 0.43 kcal mol⁻¹ Å⁻¹; see output/rutile_tio2_uff_summary.json:1-27). This is a reasonable pre-optimization but still far from
+    a converged solid-state relaxation because UFF lacks proper ionic/periodic physics.
+
+  Next steps (optional):
+
+  1. Use a solid-state method (DFT, GULP with Buckingham potentials, etc.) to relax both lattice vectors and positions starting from output/rutile_tio2_uff_opt.xyz.
+  2. Validate against experimental observables (lattice constants, Raman modes) to ensure the structure remains faithful once higher-level optimization is complete.
+```
